@@ -1,0 +1,99 @@
+<!--
+  Author : Param Trivedi
+  Institute : New Jersey School Of Technology (NJIT)
+  Email : paramktrivedi1@gmail.com
+-->
+
+<header>
+  <h1 style="font-family:Impact; color:#2ecc71; font-size: 50px"> <center> List Of Students </center> </h1>
+
+  <div class="container">
+    <p class="container">
+      <input type="text" class="form-control" ng-model="Search"  placeholder="Type your Student here"/><br/><br/>
+    </p>
+  </div>
+
+  <div class="container" id="Form-Student" ng-show="FormStudent">
+    <div class="jumbotron">
+        <h3 ><center style="font-family:Impact; color:white" > Add New Student </center></h1>
+        <form ng-submit="AddNewStudents()" name="AddNewStudent">
+             <div class="form-group">
+               <label style="font-family:Impact; color:white; font-size: 20px"> First Name </label>
+               <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" ng-model="NewStudent.FirstName" placeholder="First Name" name="FirstName" ng-required = "true"/>
+               <div ng-show="AddNewStudent.FirstName.$touched && AddNewStudent.FirstName.$invalid">
+                <small style="color: red; display: block; text-align: center; font-size:17px;" > Enter a valid name </small>
+              </div>
+             </div>
+             <div class="form-group">
+               <label style="font-family:Impact; color:white; font-size: 20px"> Last Name </label>
+               <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" ng-model="NewStudent.LastName" placeholder="Last Name" name="LastName" ng-required = "true"/>
+               <div ng-show="AddNewStudent.LastName.$touched && AddNewStudent.LastName.$invalid">
+                <small style="color: red; display: block; text-align: center; font-size:17px;" > Enter a valid last name </small>
+              </div>
+             </div>
+             <div class="form-group">
+               <label style="font-family:Impact; color:white; font-size: 20px"> PhoneNo </label>
+               <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" ng-model="NewStudent.PhoneNo" placeholder="PhoneNo" name="PhoneNo" ng-required = "true" ng-pattern="phoneNumbr"/>
+               <div ng-show="AddNewStudent.PhoneNo.$touched && AddNewStudent.PhoneNo.$invalid && AddNewStudent.PhoneNo.$error.pattern">
+                <small style="color: red; display: block; text-align: center; font-size:17px;" > Enter a valid PhoneNo </small>
+              </div>
+             </div>
+             <div class="form-group">
+               <label style="font-family:Impact; color:white; font-size: 20px" > University </label>
+               <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="University" id="University" name="University" ng-model="NewStudent.University"  ng-required = "true" />
+               <div ng-show="AddNewStudent.University.$touched && AddNewStudent.University.$invalid">
+                <small style="color: red; display: block; text-align: center;font-size:17px;" > Enter a valid University </small>
+              </div>
+             </div>
+             <div class="form-group">
+               <input type="submit" class="btn btn-primary" value="Add New Student" ng-disabled = "AddNewStudent.$invalid" />
+             </div>
+        </form>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="container">
+    <table id="Student-List" class="table table-bordered table-hover "  >
+        <tr style="background-color:#2ecc71;">
+            <th > Profile Photo</th>
+            <th ><a style="color: black;" ng-click="Order = 'FirstName'" > First Name </a></th>
+            <th ><a style="color: black;" ng-click="Order = 'LastName'" > Last Name </a></th>
+            <th ><a style="color: black;" ng-click="Order = 'PhoneNo'" > Phone No </a></th>
+            <th ><a style="color: black;" ng-click="Order = 'University'" > University </a></th>
+            <th> <a  style="color: black;"> Edit </a> </th>
+            <th><a style="color: black;" > Delete </a></th>
+        </tr>
+        <tr  ng-repeat="row in Person | filter : Search | orderBy : Order" class="table-success" bgcolor="white">
+
+            <td><img ng-src="{{row.Profile}}" style= "margin : 5px 15px 5px 10px; float: left; width : 40px; height: 40px; position: relative; " /> </td>
+            <td ><span editable-text="row.FirstName" e-name="FirstName" e-form="rowform">  {{row.FirstName}} </span></td>
+            <td><span editable-text="row.LastName"  e-name="LastName" e-form="rowform"> {{row.LastName}} </span> </td>
+            <td ><span editable-text="row.PhoneNo"  e-name="PhoneNo" e-form="rowform" > {{row.PhoneNo}} </span> </td>
+            <td><span editable-text="row.University" e-uib-typeahead="University for University in University_List | filter : $viewValue |limitTo:3" e-name="University" e-form="rowform"> {{row.University}} </span> </td>
+            <td style="white-space: nowrap">
+              <!-- form -->
+              <form editable-form name="rowform" onbeforesave="saveUser($data, row.FirstName)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == row">
+                <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                  save
+                </button>
+                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                  cancel
+                </button>
+              </form>
+              <div class="buttons" ng-show="!rowform.$visible">
+                <a><span  class="glyphicon glyphicon-pencil" ng-click="rowform.$show()"> </span></a>
+              </div>
+            </td>
+           <td><a><span class="glyphicon glyphicon-trash" ng-click="RemoveStudent(row)"></span> </a></td>
+         </form>
+
+        </tr>
+    </table>
+    <div class="container">
+      <button class="btn btn-success" ng-click="AddStudents()" id="Btn-Student"> Add New Student </button><br/><br/>
+    </div>
+  </div>
+`
+</header>

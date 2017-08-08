@@ -1,0 +1,19 @@
+[{
+  "Profile":"Content/Image/Param.jpg",
+	"FirstName": "Param",
+	"LastName": "Trivedi",
+	"PhoneNo": 8622707510,
+	"University": "NJIT"
+}, {
+  "Profile":"Content/Image/Kavan.jpg",
+	"FirstName": "kavan",
+	"LastName": "Patel",
+	"PhoneNo": 8622707537,
+	"University": "NJIT"
+}, {
+  "Profile":"Content/Image/Maharaj.jpg",
+	"FirstName": "xyz",
+	"LastName": "abc",
+	"PhoneNo": 123123123,
+	"University": "NJIT"
+}]
